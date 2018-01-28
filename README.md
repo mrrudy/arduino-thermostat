@@ -1,6 +1,6 @@
 # Arduino Thermostat
 
-This Arduino library that handles basic logic for thermostat opeartion.
+This Arduino library handles basic logic for thermostat opeartion.
 
 ## Features
 
