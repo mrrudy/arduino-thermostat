@@ -16,7 +16,6 @@ Thermostat::Thermostat()
 }
 
 
-
 bool Thermostat::setDesiredTemp(float requestedTemp){
   _requestedTemp = requestedTemp;
   _shouldCompare=true;
@@ -31,7 +30,7 @@ Thermostat& Thermostat::setReadoutHandler(ThermostatInternal::ReadoutHandler han
   _readoutHandler=handler;
   return *this;
 }
-Thermostat& Thermostat::setup(uint32_t readoutFreq, uint32_t hysteresis){
+Thermostat& Thermostat::setup(uint32_t readoutFreq, float hysteresis){
   _readoutFreq=readoutFreq;
   _hysteresis=hysteresis;
   _shouldCompare=true;
@@ -42,16 +41,20 @@ Thermostat& Thermostat::loop(){
     _shouldCompare=false;
     if(_lastReadoutTemp<=_requestedTemp-_hysteresis){//the temperature is too low, turn on heating
       _operationHandler(this, ThermostatOperation::HEATING_ON);
-      return this;
+      return *this;
     }
     if (_lastReadoutTemp>=_requestedTemp) {
       _operationHandler(this, ThermostatOperation::HEATING_OFF);
-      return this;
+      return *this;
     }
   }
   if (millis()-_lastReadoutTime>=_readoutFreq) {
     _lastReadoutTime=millis();
-    _lastReadoutTemp=_readoutHandler();
+    _lastReadoutTemp=_readoutHandler(this);
     _shouldCompare=true; //TODO check if there was a change in the temp and only then compare
+    return *this;
   }
 }
+
+//void setup(){};
+//void loop(){};

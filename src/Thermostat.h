@@ -3,6 +3,7 @@
 
 #include "Arduino.h"
 
+
 #include "ThermostatOperation.hpp"
 
 //#include "Thermostat/StoredState.hpp"
@@ -40,7 +41,7 @@ public:
   Thermostat& loop();
   Thermostat& setOperationHandler(ThermostatInternal::OperationHandler handler);
   Thermostat& setReadoutHandler(ThermostatInternal::ReadoutHandler handler);
-  Thermostat& setup(uint32_t readoutFreq, uint32_t hysteresis);
+  Thermostat& setup(uint32_t readoutFreq, float hysteresis);
 };
 
 #endif
