@@ -54,7 +54,7 @@ Thermostat& Thermostat::loop(){
         if (millis()-_lastReadoutTime>=_readoutFreq) {
                 _lastReadoutTime=millis();
                 float temp_redout=_readoutHandler(this);
-                if (temp_redout!=_lastReadoutTemp) {
+                if (temp_redout!=_lastReadoutTemp && (!isnan(temp_redout))) {
                         _lastReadoutTemp=temp_redout;
                         _shouldCompare=true;
                 }
