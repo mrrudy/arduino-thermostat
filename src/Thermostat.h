@@ -1,6 +1,7 @@
 #ifndef Thermostat_h
 #define Thermostat_h
-
+#include <log.h>
+#include <Homie.h>
 #include "Arduino.h"
 
 
@@ -14,7 +15,8 @@ namespace ThermostatInternal {
 
   enum State : uint8_t {
     STATE_HEATING_OFF, // heating off
-    STATE_HEATING_ON
+    STATE_HEATING_ON,
+    STATE_HEATING_UNK
   };
 
   typedef void (*OperationHandler)(::Thermostat* s, ::ThermostatOperation operation);
